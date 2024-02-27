@@ -71,7 +71,7 @@ exports.searchRides = async (req, res) => {
     const travel_list = await DriverRide.find({
       source,
       destination,
-      date,
+
       // Search for rides on or after the specified date
     });
 
