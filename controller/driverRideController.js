@@ -75,7 +75,7 @@ exports.searchRides = async (req, res) => {
       // Search for rides on or after the specified date
     });
 
-    return res.status(200).json(travel_list);
+    return res.status(200).json({ travel_list });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
