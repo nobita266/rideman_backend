@@ -11,10 +11,10 @@ exports.addRide = async (req, res) => {
     const email = req.session.email;
 
     // Find the user by email
-    const userDetails = await User.findOne({ email });
-    if (!userDetails) {
-      return res.status(404).json({ error: "User not found" });
-    }
+    // const userDetails = await User.findOne({ email });
+    // if (!userDetails) {
+    //   return res.status(404).json({ error: "User not found" });
+    // }
 
     // Create a new ride associated with the user
     const ride = new DriverRide({
@@ -23,15 +23,14 @@ exports.addRide = async (req, res) => {
       departure,
       arrival,
       date,
-      user: userDetails._id,
       price,
       vacancy,
     });
     await ride.save();
 
     // Add the ride to the user's rides
-    userDetails.rides.push(ride);
-    await userDetails.save();
+    // userDetails.rides.push(ride);
+    // await userDetails.save();
 
     return res
       .status(200)
