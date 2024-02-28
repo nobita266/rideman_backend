@@ -112,7 +112,7 @@ const logInUser = async (req, res) => {
     return res
       .status(200)
       .cookie("token", token, options)
-      .json({ firstname, lastname });
+      .json({ firstname: userData.firstname, lastname: userData.lastname });
   } catch (error) {
     console.log("Error :" + error.message);
   }
