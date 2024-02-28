@@ -105,7 +105,6 @@ const logInUser = async (req, res) => {
     userData.password = undefined;
     req.session.email = email;
     return res.status(200).cookie("token", token, options).json({
-      userData,
       msg: "You have login successful",
       accessToken: token,
     });
