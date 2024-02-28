@@ -109,10 +109,10 @@ const logInUser = async (req, res) => {
     //   msg: "You have login successful",
     //   accessToken: token,
     // });
-    return res
-      .status(200)
-      .cookie("token", token, options)
-      .json({ firstname: userData.firstname, lastname: userData.lastname });
+    let arr = [];
+    arr.push(userData.firstname);
+    arr.push(userData.lastname);
+    return res.status(200).cookie("token", token, options).json({ arr });
   } catch (error) {
     console.log("Error :" + error.message);
   }
