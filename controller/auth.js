@@ -104,15 +104,15 @@ const logInUser = async (req, res) => {
     userData.token = token;
     userData.password = undefined;
     req.session.email = email;
-    // return res.status(200).cookie("token", token, options).json({
-    //   userData,
-    //   msg: "You have login successful",
-    //   accessToken: token,
-    // });
-    let arr = [];
-    arr.push(userData.firstname);
-    arr.push(userData.lastname);
-    return res.status(200).cookie("token", token, options).json({ arr });
+    return res.status(200).cookie("token", token, options).json({
+      userData,
+      msg: "You have login successful",
+      accessToken: token,
+    });
+    // let arr = [];
+    // arr.push(userData.firstname);
+    // arr.push(userData.lastname);
+    // return res.status(200).cookie("token", token, options).json({ arr });
   } catch (error) {
     console.log("Error :" + error.message);
   }

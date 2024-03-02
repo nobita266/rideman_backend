@@ -18,14 +18,14 @@ const rideSchema = new mongoose.Schema(
       required: true,
     },
     date: {
-      type: Date,
-      default: Date.now(),
+      type: String,
     },
 
     price: {
       type: Number,
       required: true,
     },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 
     vacancy: {
       type: Number,
