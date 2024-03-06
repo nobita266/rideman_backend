@@ -106,8 +106,14 @@ const logInUser = async (req, res) => {
     userData.token = token;
     userData.password = undefined;
     req.session.email = email;
+
+    const firstname = userData.firstname;
+    const lastname = userData.lastname;
+
     return res.status(200).cookie("token", token, options).json({
-      userData,
+      firstname,
+      lastname,
+      email,
       msg: "You have login successful",
       accessToken: token,
     });
