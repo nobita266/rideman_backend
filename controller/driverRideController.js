@@ -1,5 +1,5 @@
 // controllers/driverRideController.js
-const DriverRide = require("../model/DriverRide");
+const DriverRide = require("../model/Ride");
 const User = require("../model/User");
 
 exports.addRide = async (req, res) => {
@@ -13,13 +13,17 @@ exports.addRide = async (req, res) => {
     // Find the user by email
     const userDetails = await User.findOne({ email });
     console.log(userDetails, email);
-    const userId = userDetails._id;
+
     if (!userDetails) {
       return res.status(404).json({ error: "User not found" });
     }
+    const userId = userDetails._id;
+    const fullName = `${userDetails.firstname} ${userDetails.lastname}`;
+    console.log(fullName);
 
     // Create a new ride associated with the user
     const ride = new DriverRide({
+      fullName: fullName,
       source,
       destination,
       departure,
@@ -70,6 +74,12 @@ exports.searchRides = async (req, res) => {
 
   try {
     // Search for rides based on source, destination, and date
+    // console.log(req.session.email);
+    const email = req.session.email;
+    console.log(email, "yhj");
+    const userDetails = await User.findOne({ email: email });
+    console.log(userDetails);
+
     const travel_list = await DriverRide.find({
       source,
       destination,

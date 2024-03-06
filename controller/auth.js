@@ -33,9 +33,11 @@ const registerUser = async (req, res) => {
 
     //encrypt the user password
     const hashPassword = await bcrypt.hash(password, 10);
+    const id = "u" + Date.now();
 
     // save the user data into db
     const userData = await User.create({
+      id: id,
       firstname: firstName,
       lastname: lastName,
       email,

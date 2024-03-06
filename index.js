@@ -4,7 +4,7 @@ const { DBConnection } = require("./database/db");
 const cors = require("cors");
 const { authRoutes } = require("./routes/auth");
 const { default: mongoose } = require("mongoose");
-const DriverRide = require("./model/DriverRide");
+const DriverRide = require("./model/Ride");
 const User = require("./model/User");
 const session = require("express-session");
 const driverRideRoutes = require("./routes/driverRideRoutes");
@@ -29,6 +29,17 @@ DBConnection();
 app.use("/api/auth", authRoutes);
 
 app.use("/api", driverRideRoutes);
+app.post("/registerDriver", async (req, res) => {
+  const {
+    id,
+    firstName,
+    lastName,
+    age,
+    isProfileVerified,
+    bio,
+    ridesCompleted,
+  } = req.body;
+});
 
 app.listen(8080, () => {
   console.log("server listen in 8080");
