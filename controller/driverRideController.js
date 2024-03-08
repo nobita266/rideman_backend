@@ -3,12 +3,22 @@ const DriverRide = require("../model/Ride");
 const User = require("../model/User");
 
 exports.addRide = async (req, res) => {
-  const { source, destination, departure, arrival, price, date, vacancy } =
-    req.body;
+  const {
+    source,
+    pickupAddress,
+    destination,
+    destinationAddress,
+    departure,
+    arrival,
+    price,
+    date,
+    vacancy,
+  } = req.body;
 
   try {
     // Get user's email from session
     const email = req.session.email;
+    console.log(req.session);
 
     // Find the user by email
     const userDetails = await User.findOne({ email });
@@ -25,7 +35,9 @@ exports.addRide = async (req, res) => {
     const ride = new DriverRide({
       fullName: fullName,
       source,
+      pickupAddress,
       destination,
+      destinationAddress,
       departure,
       arrival,
       date,
@@ -145,5 +157,15 @@ exports.updateRide = async (req, res) => {
   } catch (error) {
     console.error("Error updating driver ride:", error);
     return res.status(500).json({ error: "Internal server error" });
+  }
+};
+exports.individualRide = async (req, res) => {
+  const { id } = req.query;
+  console.log(id);
+  try {
+    const individualRide = await DriverRide.findById(id);
+    res.status(200).json(individualRide);
+  } catch (error) {
+    return res.status(500).json({ msg: err.message });
   }
 };
