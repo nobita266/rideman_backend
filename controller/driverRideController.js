@@ -164,7 +164,7 @@ exports.individualRide = async (req, res) => {
   console.log(id);
   try {
     const individualRide = await DriverRide.findById(id);
-    res.status(200).json(individualRide);
+    res.status(200).json({ rideDetails: individualRide });
   } catch (error) {
     return res.status(500).json({ msg: err.message });
   }
