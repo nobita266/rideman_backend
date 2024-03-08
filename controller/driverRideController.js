@@ -64,6 +64,7 @@ exports.getYourRides = async (req, res) => {
     const email = req.session.email;
     const userDetails = await User.findOne({ email });
     if (!userDetails) {
+      console.log("404 is login signup");
       return res.status(404).json({ error: "Login/signup requires not found" });
     }
 
