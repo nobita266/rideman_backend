@@ -75,7 +75,7 @@ exports.getYourRides = async (req, res) => {
       rides.push(ride);
     }
 
-    return res.status(200).json(rides);
+    return res.status(200).json({ publishRides: rides });
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
