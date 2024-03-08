@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  phone: {
+    type: String,
+    required: true,
+  },
   rides: [{ type: mongoose.Schema.Types.ObjectId, ref: "Ride" }],
 });
 

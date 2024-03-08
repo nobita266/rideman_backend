@@ -8,17 +8,18 @@ const session = require("express-session");
 const registerUser = async (req, res) => {
   try {
     //get all the data from frontend
-    const { firstName, lastName, email, password } = req.body;
+    const { firstname, lastname, phone, email, password } = req.body;
 
     //check all the data should exist
 
     const validator = new Validator();
     const { getUser, inputValidation } = validator;
     const { isInputValid, msg: inputValidationMsg } = inputValidation({
-      firstName,
-      lastName,
+      firstname,
+      lastname,
       email,
       password,
+      phone,
     });
     console.log(isInputValid);
     if (!isInputValid) {
@@ -38,9 +39,10 @@ const registerUser = async (req, res) => {
     // save the user data into db
     const userData = await User.create({
       id: id,
-      firstname: firstName,
-      lastname: lastName,
+      firstname: firstname,
+      lastname: lastname,
       email,
+      phone,
       password: hashPassword,
     });
 
@@ -109,11 +111,13 @@ const logInUser = async (req, res) => {
 
     const firstname = userData.firstname;
     const lastname = userData.lastname;
+    const phone = userData.phone;
 
     return res.status(200).cookie("token", token, options).json({
       firstname,
       lastname,
       email,
+      phone,
       msg: "You have login successful",
       accessToken: token,
     });
